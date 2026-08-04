@@ -6,10 +6,10 @@
 function BlueprintMarks() {
   return (
     <>
-      <span className="bp-mark -top-[3px] -left-[3px]" />
-      <span className="bp-mark -top-[3px] -right-[3px]" />
-      <span className="bp-mark -bottom-[3px] -left-[3px]" />
-      <span className="bp-mark -right-[3px] -bottom-[3px]" />
+      <span className="bp-mark -top-[4px] -left-[4px]" />
+      <span className="bp-mark -top-[4px] -right-[4px]" />
+      <span className="bp-mark -bottom-[4px] -left-[4px]" />
+      <span className="bp-mark -right-[4px] -bottom-[4px]" />
     </>
   );
 }
