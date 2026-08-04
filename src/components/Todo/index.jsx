@@ -41,7 +41,7 @@ function Todolist() {
 
       <main className="px-6 pt-6.5 pb-10 lg:flex-1 lg:px-8">
         <div className="flex flex-wrap items-end gap-4">
-          <h2 className="font-heading text-[36px] leading-[1.1] font-semibold">今日待辦</h2>
+          <h1 className="font-heading text-[36px] leading-[1.1] font-semibold">今日待辦</h1>
           <div className="ml-auto flex gap-2">
             {filterTabs.map((filterTab) => (
               <FilterTodoBtn
