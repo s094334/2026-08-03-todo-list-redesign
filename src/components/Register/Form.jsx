@@ -1,78 +1,62 @@
-import { useState } from "react"
-import { useForm } from "react-hook-form"
-import { Link, useNavigate } from 'react-router'
-import { fields, subTitle } from './data'
-import { signUp } from '../../apis'
-
-const Input = ({ label, name, register, required, rules = {}, errors, ...props }) => {
-  const fieldError = errors[name];
-  return (
-    <>
-      <label className="text-sm font-bold mt-4 mb-1" htmlFor={name}>{label}</label>
-      <input 
-        id={name}
-        className="font-normal bg-white rounded-[10px] w-[304px] px-4 py-3 my-1 placeholder:text-[#9F9A91]"
-        {...props}
-        {...register(name, { required, ...rules })}/>
-      {fieldError && (
-        <p className="text-red-600 text-sm mt-1">{ fieldError.message }</p>
-      )}
-    </>
-  )
-}
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { Link, useNavigate } from "react-router";
+import { signUp } from "../../apis";
+import FormField from "../../common/FormField";
+import PrimaryButton from "../../common/PrimaryButton";
+import { AlertIcon } from "../../common/icons";
+import { fields } from "./data";
 
 function Form() {
-  let navigate = useNavigate();
-  const [errorLog, setErrorLog] = useState('');
+  const navigate = useNavigate();
+  const [errorLog, setErrorLog] = useState("");
 
   const {
     register,
-    formState: { errors },
-    handleSubmit 
+    handleSubmit,
+    formState: { errors, isSubmitting },
   } = useForm();
 
   const onSubmit = async (data) => {
-    setErrorLog(''); 
+    setErrorLog("");
     try {
       await signUp(data.email, data.password, data.name);
-      alert('恭喜成功註冊，歡迎加入');
-      navigate('/');
-
+      navigate("/", { state: { registered: true } });
     } catch (error) {
-      console.log(error.response?.data?.message);
-      setErrorLog(error.response?.data?.message || "發生錯誤，請稍後再試")
+      setErrorLog(error.response?.data?.message || "發生錯誤，請稍後再試");
     }
-  }
+  };
 
   return (
-    <div>
-      <form className="flex flex-col ml-0 md:ml-[100px]" onSubmit={handleSubmit(onSubmit)}>
-        <h2 className="font-bold mb-6 text-xl text-center md:text-2xl md:text-left">
-          { subTitle }
-        </h2>
-        {
-          fields.map((field) => (
-            <Input key={field.name} {...field} register={ register } errors={errors} />
-          ))
-        }
-        <button
-          type="submit"
-          className="w-32 h-12 rounded-[10px] bg-[#333] text-white self-center my-6 font-bold cursor-pointer text-center text-base"
-        >
-          註冊帳號
-        </button>
-        { errorLog && 
-          <p className="text-red-700 text-center mb-3"> { errorLog } </p>
-        }
+    <>
+      <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
+        {fields.map((field) => (
+          <FormField key={field.name} {...field} register={register} errors={errors} />
+        ))}
+
+        {errorLog && (
+          <p className="flex items-center gap-1.5 rounded-card border border-danger-600 bg-danger-100 px-3 py-2 text-xs text-danger-700">
+            <AlertIcon size={13} />
+            {errorLog}
+          </p>
+        )}
+
+        <PrimaryButton type="submit" className="w-full" disabled={isSubmitting}>
+          建立帳號
+        </PrimaryButton>
+      </form>
+
+      <div className="flex items-center gap-2 text-[13px] opacity-70">
+        已經有帳號了？
         <Link
           to="/"
-          className="block text-[#333] font-bold no-underline text-center"
+          className="font-heading inline-flex h-8 items-center rounded-card px-2.5 text-sm font-semibold tracking-[0.02em] text-accent-700 hover:bg-accent-100 active:bg-accent-200"
         >
           登入
         </Link>
-      </form>
-    </div>
-  )
-};
+      </div>
+    </>
+  );
+}
 
 export default Form;

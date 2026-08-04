@@ -1,73 +1,72 @@
-import { useState } from "react"
-import { useForm } from "react-hook-form"
-import { Link, useNavigate } from 'react-router'
-import { signIn } from '../../apis'
-import { fields, subTitle } from "./data"
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { Link, useLocation, useNavigate } from "react-router";
+import { signIn } from "../../apis";
+import FormField from "../../common/FormField";
+import PrimaryButton from "../../common/PrimaryButton";
+import { AlertIcon, CheckIcon } from "../../common/icons";
+import { fields } from "./data";
 
-const SignInInput = ({ label, name, register, required, rules = {}, errors, ...props }) => (
-  <>
-    <label className="text-sm font-bold mt-4 mb-1" htmlFor={name}>{label}</label>
-    <input 
-      id={name} 
-      className="font-normal bg-white rounded-[10px] w-[304px] px-4 py-3 my-1 placeholder:text-[#9F9A91]"
-      {...props}
-      {...register(name, { required, ...rules })}/>
-    {errors[name] && (
-      <p className="text-red-600 text-sm mt-1">{ errors[name].message }</p>
-    )}
-  </>
-)
-
-function SignIn () {
+function SignIn() {
   const navigate = useNavigate();
-  const [errorLog, setErrorLog] = useState('');
+  const justRegistered = useLocation().state?.registered;
+  const [errorLog, setErrorLog] = useState("");
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
-  } = useForm()
+    formState: { errors, isSubmitting },
+  } = useForm();
 
   const onSubmit = async (data) => {
-    setErrorLog(''); 
+    setErrorLog("");
     try {
       const result = await signIn(data.email, data.password);
-      localStorage.setItem('nickname', result.nickname);
-      localStorage.setItem('token', result.token);
-      navigate('/todolist');
-
+      localStorage.setItem("nickname", result.nickname);
+      localStorage.setItem("token", result.token);
+      navigate("/todolist");
     } catch (error) {
-      setErrorLog(error.response?.data?.message || "發生錯誤，請稍後再試")
+      setErrorLog(error.response?.data?.message || "發生錯誤，請稍後再試");
     }
-  }
+  };
 
   return (
-    <div>
-      <form className="flex flex-col ml-0 sm:ml-[100px]" onSubmit={ handleSubmit(onSubmit) }>
-        <h2 className="font-bold mb-6 text-xl text-center sm:text-2xl sm:text-left">
-          最實用的線上待辦事項服務
-        </h2>
-        {
-          fields.map((field) => <SignInInput key={field.name} {...field} register={ register } errors={errors} />)
-        }
-        <button
-          className="w-32 h-12 rounded-[10px] bg-[#333] text-white self-center my-6 font-bold cursor-pointer text-center text-base"
-          type="submit"
-        >
+    <>
+      <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
+        {justRegistered && (
+          <p className="flex items-center gap-1.5 rounded-card border border-accent-600 bg-accent-100 px-3 py-2 text-xs text-accent-800">
+            <CheckIcon size={13} />
+            恭喜成功註冊，歡迎加入 —— 請登入。
+          </p>
+        )}
+
+        {fields.map((field) => (
+          <FormField key={field.name} {...field} register={register} errors={errors} />
+        ))}
+
+        {errorLog && (
+          <p className="flex items-center gap-1.5 rounded-card border border-danger-600 bg-danger-100 px-3 py-2 text-xs text-danger-700">
+            <AlertIcon size={13} />
+            {errorLog}
+          </p>
+        )}
+
+        <PrimaryButton type="submit" className="w-full" disabled={isSubmitting}>
           登入
-        </button>
-        { errorLog && 
-          <p className="text-red-700 text-center mb-3"> { errorLog } </p>
-        }
-        <Link
-          to='/register'
-          className="block text-[#333] font-bold no-underline text-center"
-        >
-          註冊帳號
-        </Link>
+        </PrimaryButton>
       </form>
-    </div>
-  )
+
+      <div className="flex items-center gap-2 text-[13px] opacity-70">
+        還沒有帳號？
+        <Link
+          to="/register"
+          className="font-heading inline-flex h-8 items-center rounded-card px-2.5 text-sm font-semibold tracking-[0.02em] text-accent-700 hover:bg-accent-100 active:bg-accent-200"
+        >
+          建立帳號
+        </Link>
+      </div>
+    </>
+  );
 }
 
 export default SignIn;

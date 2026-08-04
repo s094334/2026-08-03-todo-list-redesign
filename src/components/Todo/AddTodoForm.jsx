@@ -1,39 +1,31 @@
 import { useForm } from "react-hook-form";
+import PrimaryButton from "../../common/PrimaryButton";
+import { PlusIcon } from "../../common/icons";
 
-function AddTodoForm ({ onAdd, isAdding }) {
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-    reset,
-    watch
-  } = useForm()
+function AddTodoForm({ onAdd, isAdding }) {
+  const { register, handleSubmit, reset, watch } = useForm();
 
   const content = watch("content");
 
   const onSubmit = (data) => {
-    onAdd(data.content, { onSuccess: () => reset() });
-  }
+    onAdd(data.content.trim(), { onSuccess: () => reset() });
+  };
 
   return (
-    <form 
-      onSubmit={ handleSubmit(onSubmit) }
-      className="relative flex w-full mb-4 shadow-[0_0_15px_0_rgba(0,0,0,0.15)]">
+    <form onSubmit={handleSubmit(onSubmit)} className="flex gap-2">
       <input
-        className="relative w-full h-[47px] pl-4 text-base bg-white rounded-[10px]"
         type="text"
-        placeholder="請輸入待辦事項"
-        { ...register("content") }
+        placeholder="新增任務，按 Enter 送出"
+        aria-label="新增任務"
+        className="h-10 flex-1 rounded-card border border-line bg-transparent px-3 text-sm outline-none placeholder:text-ink/40 hover:border-ink/30 focus:border-accent-600 focus:ring-2 focus:ring-accent-600/20"
+        {...register("content")}
       />
-      <button
-        type="submit"
-        disabled={ isAdding || !content?.trim() }
-        className="absolute top-1 right-1 block w-10 h-[39px] p-[10px] text-center text-[20px] leading-none text-white no-underline bg-[#333] rounded-[10px] disabled:bg-gray-300"
-      >
-        +
-      </button>
+      <PrimaryButton type="submit" disabled={isAdding || !content?.trim()}>
+        <PlusIcon />
+        新增
+      </PrimaryButton>
     </form>
-  )
-};
+  );
+}
 
 export default AddTodoForm;

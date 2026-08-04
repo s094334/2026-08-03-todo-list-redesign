@@ -1,13 +1,19 @@
-function FilterTodoBtn ({ name, dataTab, isSelected, onFilter }) {
+function FilterTodoBtn({ name, dataTab, isSelected, onFilter }) {
   return (
     <button
-      data-tab={ dataTab }
-      className={`block w-full p-4 font-bold leading-5 text-center border-b-2 cursor-pointer ${isSelected ? "text-[#333] border-[#333]" : "text-[#9F9A91] border-[#efefef]"}`}
+      type="button"
+      data-tab={dataTab}
+      aria-pressed={isSelected}
       onClick={() => onFilter(dataTab)}
+      className={`font-heading rounded-card border px-3 py-1.5 text-[13px] font-semibold tracking-[0.02em] ${
+        isSelected
+          ? "border-accent-600 bg-accent-600 text-paper"
+          : "border-line hover:border-accent-600 hover:bg-accent-100 active:bg-accent-200"
+      }`}
     >
-      { name }
+      {name}
     </button>
-  )
-};
+  );
+}
 
 export default FilterTodoBtn;
