@@ -14,7 +14,7 @@ function AuthHero() {
         夢想與逃避現實的交界處
       </h1>
 
-      <figure className="relative mt-8 grid flex-1 place-items-center border border-line p-7 lg:min-h-[260px]">
+      <figure className="relative mt-8 grid flex-1 place-items-center border border-line p-7 hidden lg:flex lg:min-h-[260px] ">
         <BlueprintMarks />
         <div className="flex flex-col items-center gap-4 text-accent-600">
           <ClipboardIcon />
