@@ -12,14 +12,14 @@ function Sidebar() {
   };
 
   return (
-    <aside className="flex flex-col gap-5.5 border-b border-line px-4.5 py-6 lg:border-r lg:border-b-0">
+    <aside className="flex flex-col gap-5.5 border-b border-line px-4.5 py-6 lg:w-[236px] lg:shrink-0 lg:border-r lg:border-b-0">
       <div>
-        <div className="text-[10px] tracking-[0.14em] uppercase opacity-50">工作區</div>
-        <div className="font-heading mt-1 text-xl font-semibold">今日待辦</div>
+        <div className="lg:flex text-[10px] tracking-[0.14em] uppercase opacity-50">工作區</div>
+        <div className="hidden lg:flex font-heading mt-1 text-xl font-semibold">今日待辦</div>
       </div>
 
       <div className="mt-auto flex flex-col gap-2.5">
-        <div className="flex items-center gap-2.5 border-t border-line pt-3.5 text-accent-600">
+        <div className="flex items-center gap-2.5 lg:border-t border-line pt-3.5 text-accent-600">
           <FaceIcon />
           <div className="min-w-0 flex-1 truncate text-sm text-ink">{nickName}</div>
         </div>
