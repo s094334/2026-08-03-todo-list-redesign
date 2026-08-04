@@ -21,7 +21,8 @@ function Form() {
     setErrorLog("");
     try {
       await signUp(data.email, data.password, data.name);
-      navigate("/", { state: { registered: true } });
+      alert('恭喜成功註冊，歡迎加入');
+      navigate("/");
     } catch (error) {
       setErrorLog(error.response?.data?.message || "發生錯誤，請稍後再試");
     }

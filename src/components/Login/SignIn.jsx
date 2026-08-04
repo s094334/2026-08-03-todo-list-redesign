@@ -1,15 +1,14 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link, useLocation, useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { signIn } from "../../apis";
 import FormField from "../../common/FormField";
 import PrimaryButton from "../../common/PrimaryButton";
-import { AlertIcon, CheckIcon } from "../../common/icons";
+import { AlertIcon } from "../../common/icons";
 import { fields } from "./data";
 
 function SignIn() {
   const navigate = useNavigate();
-  const justRegistered = useLocation().state?.registered;
   const [errorLog, setErrorLog] = useState("");
 
   const {
@@ -33,13 +32,6 @@ function SignIn() {
   return (
     <>
       <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
-        {justRegistered && (
-          <p className="flex items-center gap-1.5 rounded-card border border-accent-600 bg-accent-100 px-3 py-2 text-xs text-accent-800">
-            <CheckIcon size={13} />
-            恭喜成功註冊，歡迎加入 —— 請登入。
-          </p>
-        )}
-
         {fields.map((field) => (
           <FormField key={field.name} {...field} register={register} errors={errors} />
         ))}
