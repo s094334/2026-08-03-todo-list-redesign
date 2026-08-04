@@ -8,7 +8,7 @@ function AddTodoForm({ onAdd, isAdding }) {
   const content = watch("content");
 
   const onSubmit = (data) => {
-    onAdd(data.content.trim(), { onSuccess: () => reset() });
+    onAdd(data.content, { onSuccess: () => reset() });
   };
 
   return (
@@ -16,7 +16,6 @@ function AddTodoForm({ onAdd, isAdding }) {
       <input
         type="text"
         placeholder="新增任務，按 Enter 送出"
-        aria-label="新增任務"
         className="h-10 flex-1 rounded-card border border-line bg-transparent px-3 text-sm outline-none placeholder:text-ink/40 hover:border-ink/30 focus:border-accent-600 focus:ring-2 focus:ring-accent-600/20"
         {...register("content")}
       />

@@ -21,7 +21,6 @@ function StatsBar({ total, activeCount, doneCount, onClear, disabled }) {
         type="button"
         onClick={onClear}
         disabled={disabled}
-        aria-label="清除已完成項目"
         title="清除已完成項目"
         className="grid cursor-pointer place-items-center gap-[5px] bg-paper py-3.5 text-ink hover:bg-accent-100 hover:text-accent-600 disabled:cursor-not-allowed disabled:opacity-45 disabled:hover:bg-paper disabled:hover:text-ink"
       >

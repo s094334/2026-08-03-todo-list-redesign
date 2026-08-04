@@ -5,6 +5,7 @@ import { CheckIcon, PencilIcon, TrashIcon } from "../../common/icons";
 
 function TodoListItem({ id, status, content, onDelete, onToggle, onEdit }) {
   const [isEditing, setIsEditing] = useState(false);
+  const checkboxId = `todo-${id}`;
 
   const onSubmit = (data) => {
     onEdit(
@@ -19,8 +20,8 @@ function TodoListItem({ id, status, content, onDelete, onToggle, onEdit }) {
       className="group relative grid grid-cols-[20px_1fr_auto] items-center gap-3.5 border-b border-ink/8 px-4 py-3 last:border-b-0 hover:bg-ink/4"
     >
       <input
+        id={checkboxId}
         type="checkbox"
-        aria-label={content}
         checked={status}
         onChange={() => onToggle(id)}
         className="peer size-5 cursor-pointer appearance-none rounded-[3px] border border-ink/40 checked:border-accent-600 checked:bg-accent-600 not-checked:hover:border-accent-600 not-checked:hover:bg-accent-100"
@@ -29,13 +30,12 @@ function TodoListItem({ id, status, content, onDelete, onToggle, onEdit }) {
         <CheckIcon />
       </span>
 
-      { isEditing ? <EditTodoForm content={content} onSubmit={ onSubmit } /> : <DisplayTodo content={content} /> }
+      { isEditing ? <EditTodoForm content={content} onSubmit={ onSubmit } /> : <DisplayTodo content={content} htmlFor={ checkboxId } /> }
 
       <div className="flex items-center gap-0.5 opacity-0 transition-opacity group-focus-within:opacity-100 group-hover:opacity-100 max-lg:opacity-100">
         <button
           type="button"
           onClick={() => setIsEditing(!isEditing)}
-          aria-label="編輯"
           className="grid size-7 cursor-pointer place-items-center rounded-card text-accent-700 hover:bg-accent-100 active:bg-accent-200"
         >
           <PencilIcon />
@@ -43,7 +43,6 @@ function TodoListItem({ id, status, content, onDelete, onToggle, onEdit }) {
         <button
           type="button"
           onClick={() => onDelete(id)}
-          aria-label="刪除"
           className="grid size-7 cursor-pointer place-items-center rounded-card text-danger-600 hover:bg-danger-100"
         >
           <TrashIcon />

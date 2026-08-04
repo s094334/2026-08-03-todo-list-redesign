@@ -1,8 +1,11 @@
-function DisplayTodo({ content }) {
+function DisplayTodo({ content, htmlFor }) {
   return (
-    <span className="text-base transition-all duration-[400ms] peer-checked:line-through peer-checked:opacity-45">
+    <label
+      htmlFor={ htmlFor }
+      className="cursor-pointer text-base transition-all duration-[400ms] peer-checked:line-through peer-checked:opacity-45"
+    >
       { content }
-    </span>
+    </label>
   )
 };
 
