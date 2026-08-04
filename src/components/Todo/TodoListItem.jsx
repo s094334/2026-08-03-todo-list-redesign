@@ -30,7 +30,7 @@ function TodoListItem({ id, status, content, onDelete, onToggle, onEdit }) {
         <CheckIcon />
       </span>
 
-      { isEditing ? <EditTodoForm content={content} onSubmit={ onSubmit } /> : <DisplayTodo content={content} htmlFor={ checkboxId } /> }
+      { isEditing ? <EditTodoForm content={content} onSubmit={ onSubmit } /> : <DisplayTodo content={content} /> }
 
       <div className="flex items-center gap-0.5 opacity-0 transition-opacity group-focus-within:opacity-100 group-hover:opacity-100 max-lg:opacity-100">
         <button
