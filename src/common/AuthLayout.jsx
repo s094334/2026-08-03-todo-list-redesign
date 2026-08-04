@@ -7,11 +7,11 @@ import BlueprintMarks from "./BlueprintMarks";
  */
 function AuthLayout({ title, subtitle, children }) {
   return (
-    <div className="grid min-h-screen lg:grid-cols-[1.05fr_1fr]">
+    <div className="flex min-h-screen flex-col p-4 lg:flex-row lg:p-11">
       <AuthHero />
 
-      <div className="grid place-items-center px-6 py-10 lg:p-11">
-        <div className="relative flex w-[min(400px,100%)] flex-col gap-4 rounded-card border border-line p-8">
+      <div className="flex items-center justify-center px-6 py-10 lg:flex-2 lg:p-11">
+        <div className="relative flex w-[min(500px,100%)] flex-col gap-4 rounded-card border border-line p-8">
           <BlueprintMarks />
           <div>
             <h2 className="font-heading text-h2 leading-[1.1] font-semibold">{title}</h2>
