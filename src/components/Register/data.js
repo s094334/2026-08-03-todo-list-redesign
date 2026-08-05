@@ -3,8 +3,8 @@ export const fields = [
     label: "姓名",
     name: "name",
     type: "text",
-    placeholder: "陳可安",
-    required: "請輸入您的暱稱"
+    placeholder: "請輸入您的姓名",
+    required: "請輸入您的姓名"
   },
   {
     label: "電子郵件",
@@ -20,7 +20,7 @@ export const fields = [
     label: "密碼",
     name: "password",
     type: "password",
-    placeholder: "至少 8 個字元",
+    placeholder: "至少 6 個字元",
     required: "請輸入密碼",
     rules: {
       minLength: { value: 6, message: "密碼至少需要 6 個字元" }
