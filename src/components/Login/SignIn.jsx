@@ -48,7 +48,7 @@ function SignIn() {
         </PrimaryButton>
       </form>
 
-      <div className="flex items-center gap-2 text-[13px] opacity-70">
+      <div className="flex items-center gap-2 text-help opacity-70">
         還沒有帳號？
         <Link
           to="/register"

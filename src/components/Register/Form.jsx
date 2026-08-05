@@ -47,7 +47,7 @@ function Form() {
         </PrimaryButton>
       </form>
 
-      <div className="flex items-center gap-2 text-[13px] opacity-70">
+      <div className="flex items-center gap-2 text-help opacity-70">
         已經有帳號了？
         <Link
           to="/"

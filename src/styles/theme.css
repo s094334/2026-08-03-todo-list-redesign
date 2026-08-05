@@ -1,26 +1,18 @@
-/* Todo List 設計系統 — Tailwind v4 tokens
-   來源：Claude Design 專案 tailwind/theme.css，請勿手動改動，需調整請回設計系統改。
-   用法：在你的入口 CSS 檔 @import "tailwindcss"; 之後匯入本檔。 */
-
 @theme {
-  /* 基礎角色 */
   --color-paper: #f6f2ee;   /* 頁面底 */
-  --color-panel: #efe7e0;   /* 表頭列、停用欄位底 */
   --color-ink: #241c16;     /* 文字 */
-  --color-line: #d5cec8;    /* 髮絲框線（= ink 16% 疊在 paper 上）*/
+  --color-line: #d5cec8;    /* 框線*/
+  --color-field: #e9e9ea;   /* 輸入欄位底 */
 
-  /* 強調色階梯 */
   --color-accent-100: #fdf0e8;
   --color-accent-200: #fadbc8;
   --color-accent-300: #f4c0a2;
   --color-accent-400: #eda078;
   --color-accent-500: #e28050;
-  --color-accent-600: #d1622a;  /* 基準 */
+  --color-accent-600: #d1622a;
   --color-accent-700: #a94c1e;
   --color-accent-800: #7b3616;
-  --color-accent-900: #50230e;
 
-  /* 功能色：僅用於錯誤 */
   --color-danger-100: #fbeae9;
   --color-danger-600: #c1443c;
   --color-danger-700: #8f2420;
@@ -29,27 +21,30 @@
   --font-heading: "Barlow Condensed", ui-sans-serif, sans-serif;
   --font-body: "Barlow", ui-sans-serif, sans-serif;
 
-  /* 字級（配合 leading / tracking 見 readme）*/
-  --text-label: 0.6875rem;  /* 11px */
-  --text-help: 0.8125rem;   /* 13px */
-  --text-item: 1rem;        /* 16px */
-  --text-stat: 1.875rem;    /* 30px */
-  --text-h2: 2.125rem;      /* 34px */
-  --text-h1: 2.875rem;      /* 46px */
+  /* 字級 */
+  --text-h1: 38px;         /* 登入頁主標（桌機） */
+  --text-h2: 34px;
+  --text-micro: 10px;      /* 統計格、側欄的全大寫小標 */
+  --text-label: 11px;
+  --text-help: 13px;
+  --text-hero-sm: 30px;    /* 登入頁主標（手機） */
+  --text-page: 36px;       /* 頁面主標（待辦頁） */
 
-  /* 圓角：線框系統只有一個值 */
+  /* 圓角 */
   --radius-card: 4px;
+
+  /* 間距 */
+  --spacing-label: 4px;      /* 小標籤到它的標題 */
+  --spacing-row: 16px;       /* 列的左右內距 */
+  --spacing-stack: 18px;     /* 相鄰區塊；側欄左右內距 */
+  --spacing-block: 22px;     /* 主要區塊之間 */
+  --spacing-gutter: 24px;    /* 側欄上下內距 */
+  --spacing-figure: 28px;    /* 圖框內距 */
+  --spacing-section: 32px;   /* 卡片內距、大區塊上緣 */
+  --spacing-page: 48px;      /* 頁面左右邊界 */
 }
 
-/* 線框註冊標記（Industry 的簽名細節，框起來的物件都要有）
-   用法：外層加 relative，內部放四個角的標記
-   <button class="relative border border-line …">
-     <span class="bp-mark -top-[3px] -left-[3px]"></span>
-     <span class="bp-mark -top-[3px] -right-[3px]"></span>
-     <span class="bp-mark -bottom-[3px] -left-[3px]"></span>
-     <span class="bp-mark -right-[3px] -bottom-[3px]"></span>
-     …
-   </button> */
+/* 線框十字標記 */
 @utility bp-mark {
   position: absolute;
   width: 7px;
@@ -62,12 +57,7 @@
   opacity: 0.5;
 }
 
-/* 焦點環：全站統一，不留瀏覽器預設藍框 */
 @layer base {
-  :focus-visible {
-    outline: 2px solid var(--color-accent-600);
-    outline-offset: 2px;
-  }
   ::selection {
     background: var(--color-accent-200);
   }

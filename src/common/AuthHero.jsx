@@ -4,17 +4,17 @@ import { ClipboardIcon } from "./icons";
 /** 登入／註冊頁左側的介紹面板 */
 function AuthHero() {
   return (
-    <div className="relative flex flex-col border-b border-line px-6 py-10 lg:flex-1 lg:border-r lg:border-b-0 lg:px-12 lg:py-11">
-      <div className="text-[11px] tracking-[0.14em] uppercase opacity-55">
+    <div className="relative flex flex-col border-b border-line px-6 py-10 lg:flex-1 lg:border-r lg:border-b-0 lg:px-page lg:py-11">
+      <div className="text-label tracking-[0.14em] uppercase opacity-55">
         早安 — 今天想完成什麼？
       </div>
-      <h1 className="font-heading mt-4.5 text-[30px] leading-[1.14] font-semibold tracking-[-0.01em] lg:text-[38px] lg:whitespace-nowrap">
+      <h1 className="font-heading mt-stack text-hero-sm leading-[1.14] font-semibold tracking-[-0.01em] lg:text-h1 lg:whitespace-nowrap">
         Todo list：
         <br />
         夢想與逃避現實的交界處
       </h1>
 
-      <div className="relative mt-8 rounded-card grid flex-1 place-items-center border border-line p-7 hidden lg:flex lg:min-h-[260px] ">
+      <div className="relative mt-section rounded-card grid flex-1 place-items-center border border-line p-figure hidden lg:flex lg:min-h-[260px] ">
         <BlueprintMarks />
         <div className="flex flex-col items-center gap-4 text-accent-600">
           <ClipboardIcon />

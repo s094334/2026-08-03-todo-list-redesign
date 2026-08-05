@@ -17,7 +17,7 @@ function TodoListItem({ id, status, content, onDelete, onToggle, onEdit }) {
   return (
     <li
       data-id={id}
-      className="group relative grid grid-cols-[20px_1fr_auto] items-center gap-3.5 border-b border-ink/8 px-4 py-3 last:border-b-0 hover:bg-ink/4"
+      className="group relative grid grid-cols-[20px_1fr_auto] items-center gap-3.5 border-b border-ink/8 px-row py-3 last:border-b-0 hover:bg-ink/4"
     >
       <input
         id={checkboxId}
