@@ -41,7 +41,7 @@ function Todolist() {
 
       <main className="px-6 pt-6.5 pb-10 lg:flex-1 lg:px-8">
         <div className="flex flex-wrap items-end gap-4">
-          <h1 className="font-heading text-[36px] leading-[1.1] font-semibold">今日待辦</h1>
+          <h1 className="font-heading text-page leading-[1.1] font-semibold">今日待辦</h1>
           <div className="ml-auto flex gap-2">
             {filterTabs.map((filterTab) => (
               <FilterTodoBtn
@@ -62,12 +62,12 @@ function Todolist() {
           disabled={doneCount === 0}
         />
 
-        <div className="mt-5.5">
+        <div className="mt-block">
           <AddTodoForm onAdd={addTodo} isAdding={isAdding} />
         </div>
 
         {errorLog.length > 0 && (
-          <ul className="mt-4.5 flex flex-col gap-1.5 rounded-card border border-danger-600 bg-danger-100 px-4 py-3">
+          <ul className="mt-stack flex flex-col gap-1.5 rounded-card border border-danger-600 bg-danger-100 px-row py-3">
             {errorLog.map((message, index) => (
               <li key={index} className="flex items-center gap-1.5 text-xs text-danger-700">
                 <AlertIcon size={13} />
@@ -77,9 +77,9 @@ function Todolist() {
           </ul>
         )}
 
-        <div className="mt-4.5 overflow-hidden rounded-card border border-line">
+        <div className="mt-stack overflow-hidden rounded-card border border-line">
           {filteredTodos.length === 0 ? (
-            <p className="p-9 text-center text-[13px] opacity-50">這個篩選下沒有任務。</p>
+            <p className="p-9 text-center text-help opacity-50">這個篩選下沒有任務。</p>
           ) : (
             <ul>
               {filteredTodos.map((todo) => (
