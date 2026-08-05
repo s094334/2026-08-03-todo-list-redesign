@@ -8,7 +8,7 @@ function AuthHero() {
       <div className="text-label tracking-[0.14em] uppercase opacity-55">
         早安 — 今天想完成什麼？
       </div>
-      <h1 className="font-heading mt-stack text-hero-sm leading-[1.14] font-semibold tracking-[-0.01em] lg:text-hero lg:whitespace-nowrap">
+      <h1 className="font-heading mt-stack text-hero-sm leading-[1.14] font-semibold tracking-[-0.01em] lg:text-h1 lg:whitespace-nowrap">
         Todo list：
         <br />
         夢想與逃避現實的交界處
