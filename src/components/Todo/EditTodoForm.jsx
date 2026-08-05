@@ -8,6 +8,7 @@ function EditTodoForm ({ content, onSubmit }) {
 
   return (
     <form onSubmit={ handleSubmit(onSubmit) } >
+      <label htmlFor="newContent"></label>
       <input
         autoFocus
         className="h-[30px] w-full rounded-card border border-line bg-transparent px-2 text-sm outline-none hover:border-ink/30 focus:border-accent-600 focus:ring-2 focus:ring-accent-600/20"

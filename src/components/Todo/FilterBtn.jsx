@@ -3,7 +3,6 @@ function FilterTodoBtn({ name, dataTab, isSelected, onFilter }) {
     <button
       type="button"
       data-tab={dataTab}
-      aria-pressed={isSelected}
       onClick={() => onFilter(dataTab)}
       className={`font-heading rounded-card border px-3 py-1.5 text-[13px] font-semibold tracking-[0.02em] ${
         isSelected

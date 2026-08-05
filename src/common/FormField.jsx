@@ -1,10 +1,5 @@
 import { AlertIcon } from "./icons";
 
-/**
- * react-hook-form 的文字欄位。
- * 錯誤狀態依設計系統：標籤轉 danger-700、欄位 danger-600 邊框 + danger-100 底、
- * 下方帶警示圖示的訊息。
- */
 function FormField({ label, name, register, required, rules = {}, errors, ...props }) {
   const error = errors[name];
 
@@ -18,8 +13,6 @@ function FormField({ label, name, register, required, rules = {}, errors, ...pro
       </label>
       <input
         id={name}
-        aria-invalid={error ? "true" : "false"}
-        aria-describedby={error ? `${name}-error` : undefined}
         className={`h-10 w-full rounded-card border px-3 text-sm outline-none placeholder:text-ink/40 ${
           error
             ? "border-danger-600 bg-danger-100"
