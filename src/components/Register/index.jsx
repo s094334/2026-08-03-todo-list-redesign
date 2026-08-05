@@ -1,15 +1,14 @@
-import Aside from "../Login/Aside"
-import Form from "./Form"
+import AuthLayout from "../../common/AuthLayout";
+import Form from "./Form";
 
-function Register () {  
+function Register() {
   return (
-    <section id="signUpPage" className="bg-[#FFD370]">
-      <div className="mx-auto h-screen flex flex-col justify-between items-center w-full px-[31px] py-12 md:flex-row md:w-[800px] md:px-8 md:py-[87px]">
-        <Aside />
+    <section id="signUpPage">
+      <AuthLayout title="建立帳號">
         <Form />
-      </div>
+      </AuthLayout>
     </section>
-  )
+  );
 }
 
 export default Register;

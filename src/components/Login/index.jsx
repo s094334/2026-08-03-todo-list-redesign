@@ -1,15 +1,15 @@
-import Aside from "./Aside";
+import AuthLayout from "../../common/AuthLayout";
 import SignIn from "./SignIn";
+import { subTitle } from "./data";
 
 function Login() {
   return (
-    <section id="loginPage" className="bg-[#FFD370]">
-      <div className="mx-auto h-screen flex flex-col items-center justify-start w-full px-[31px] py-12 sm:flex-row sm:justify-between sm:w-[800px] sm:px-8 sm:py-[87px]">
-        <Aside />
+    <section id="loginPage">
+      <AuthLayout title="登入" subtitle={subTitle}>
         <SignIn />
-      </div>
+      </AuthLayout>
     </section>
-  )
+  );
 }
 
 export default Login;

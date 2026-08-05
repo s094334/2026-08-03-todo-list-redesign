@@ -1,8 +1,8 @@
 export const fields = [
   {
-    label: "Email",
+    label: "電子郵件",
     name: "email",
-    type: "text",
+    type: "email",
     placeholder: "請輸入 email",
     required: "請輸入 email",
     rules: {
@@ -18,4 +18,4 @@ export const fields = [
   },
 ]
 
-export const subTitle = "最實用的線上待辦事項服務"
+export const subTitle = "使用你的電子郵件繼續。"

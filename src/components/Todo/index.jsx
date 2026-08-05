@@ -1,83 +1,102 @@
 import { useState } from "react";
-import Nav from "./Nav"
+import Sidebar from "./Sidebar";
+import StatsBar from "./StatsBar";
 import AddTodoForm from "./AddTodoForm";
-import { filterTabs } from './data'
 import FilterTodoBtn from "./FilterBtn";
-import TodoListItem from "./TodoListItem"
-import { useTodos } from "../../hooks/useTodos"
+import TodoListItem from "./TodoListItem";
+import { AlertIcon } from "../../common/icons";
+import { useTodos } from "../../hooks/useTodos";
+import { filterTabs } from "./data";
 
-function Todolist () {
+function Todolist() {
   const [filter, setFilter] = useState("all");
 
-  const { todos, isAdding, errorLog, addTodo, removeTodo, toggleTodo, editTodo, clearCompleted } = useTodos();
+  const {
+    todos,
+    isAdding,
+    errorLog,
+    addTodo,
+    removeTodo,
+    toggleTodo,
+    editTodo,
+    clearCompleted,
+  } = useTodos();
 
   const filteredTodos = todos.filter((todo) => {
     switch (filter) {
-      case 'pending':
+      case "pending":
         return !todo.status;
-      case 'completed':
+      case "completed":
         return todo.status;
       default:
         return true;
     }
-  })
+  });
 
-  const completedTodos = todos.filter((todo) => todo.status);
+  const doneCount = todos.filter((todo) => todo.status).length;
 
   return (
-    <section
-      id="todoListPage"
-      className="bg-[linear-gradient(175deg,#FFD370_100%,#fff_0%)] md:bg-[linear-gradient(175deg,#FFD370_60%,#fff_40%)]"
-    >
-      <Nav />
-      <div className="h-screen mx-auto px-8 py-4">
-        <div className="w-full mx-auto md:w-[500px]">
-          <AddTodoForm onAdd={ addTodo } isAdding={ isAdding }/>
-          <div className="bg-white rounded-[10px] shadow-[0_0_15px_0_rgba(0,0,0,0.15)]">
-            <ul className="flex justify-evenly">
-              {
-                filterTabs.map((filterTab) => {
-                  return (
-                    <li className="w-full" key={ filterTab.dataTab } >
-                      <FilterTodoBtn 
-                        {...filterTab}
-                        isSelected={filter === filterTab.dataTab}
-                        onFilter={ setFilter }/>
-                    </li>
-                )})
-              }
-            </ul>
-            <div className="pt-[23px] pl-6 pr-[17px] pb-8">
-              <ul className="mb-2 overflow-y-auto max-h-[400px]">
-                { errorLog && 
-                  <p className="text-red-700"> { errorLog } </p>
-                }
-                {
-                  filteredTodos.map((todo) => 
-                  <TodoListItem
-                    key={todo.id} 
-                    {...todo}
-                    onDelete={ removeTodo }
-                    onToggle={ toggleTodo }
-                    onEdit={ editTodo } 
-                  />
-                )}
-              </ul>
-              <div className="flex justify-between">
-                <p className="text-sm text-[#333]"> {completedTodos.length} 個已完成項目</p>
-                <button
-                  type="button"
-                  className="text-sm text-[#9F9A91] cursor-pointer" onClick={ () => clearCompleted() }>
-                  清除已完成項目
-                </button>
-              </div>
-            </div>
+    <section id="todoListPage" className="flex min-h-screen flex-col lg:flex-row">
+      <Sidebar />
+
+      <main className="px-6 pt-6.5 pb-10 lg:flex-1 lg:px-8">
+        <div className="flex flex-wrap items-end gap-4">
+          <h1 className="font-heading text-page leading-[1.1] font-semibold">今日待辦</h1>
+          <div className="ml-auto flex gap-2">
+            {filterTabs.map((filterTab) => (
+              <FilterTodoBtn
+                key={filterTab.dataTab}
+                {...filterTab}
+                isSelected={filter === filterTab.dataTab}
+                onFilter={setFilter}
+              />
+            ))}
           </div>
         </div>
-      </div>
-    </section>
-  )
-};
 
+        <StatsBar
+          total={todos.length}
+          activeCount={todos.length - doneCount}
+          doneCount={doneCount}
+          onClear={() => clearCompleted()}
+          disabled={doneCount === 0}
+        />
+
+        <div className="mt-block">
+          <AddTodoForm onAdd={addTodo} isAdding={isAdding} />
+        </div>
+
+        {errorLog.length > 0 && (
+          <ul className="mt-stack flex flex-col gap-1.5 rounded-card border border-danger-600 bg-danger-100 px-row py-3">
+            {errorLog.map((message, index) => (
+              <li key={index} className="flex items-center gap-1.5 text-xs text-danger-700">
+                <AlertIcon size={13} />
+                {message}
+              </li>
+            ))}
+          </ul>
+        )}
+
+        <div className="mt-stack overflow-hidden rounded-card border border-line">
+          {filteredTodos.length === 0 ? (
+            <p className="p-9 text-center text-help opacity-50">這個篩選下沒有任務。</p>
+          ) : (
+            <ul>
+              {filteredTodos.map((todo) => (
+                <TodoListItem
+                  key={todo.id}
+                  {...todo}
+                  onDelete={removeTodo}
+                  onToggle={toggleTodo}
+                  onEdit={editTodo}
+                />
+              ))}
+            </ul>
+          )}
+        </div>
+      </main>
+    </section>
+  );
+}
 
 export default Todolist;

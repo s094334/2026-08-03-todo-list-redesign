@@ -4,7 +4,7 @@ export const filterTabs = [
     dataTab: "all"
   },
   {
-    name: "待完成",
+    name: "進行中",
     dataTab: "pending"
   },
   {
